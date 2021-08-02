@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 from nltk.stem.lancaster import LancasterStemmer
@@ -6,7 +6,7 @@ from nltk.corpus import stopwords
 from sklearn.decomposition import NMF
 from itertools import groupby
 from collections import Counter
-from sys import argv
+import sys
 import heapq
 import string
 import argparse
@@ -61,7 +61,8 @@ class TopicModeling(object):
         content = ' '.join(
             [word for word in self.content.split() if word not in self.cachedStopWords])
 
-        self.content = self.content.translate(string.punctuation)
+        table = str.maketrans('', '', string.punctuation)
+        self.content = self.content.translate(table)
         self.content = self.content.split()
 
         for word in self.content:
@@ -78,7 +79,8 @@ class TopicModeling(object):
 
                 paragraph = ' '.join(
                     [word for word in paragraph.split() if word not in self.cachedStopWords])
-                paragraph = paragraph.translate(string.punctuation)
+                table = str.maketrans('', '', string.punctuation)
+                paragraph = paragraph.translate(table)
                 paragraph = paragraph.split()
 
                 paragraph_stem = []
